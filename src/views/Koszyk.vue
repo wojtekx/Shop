@@ -93,7 +93,7 @@ export default {
           margin: 10px 0;
           p{
             width: 100px;
-            margin-right: 44px;
+            margin-right: 42px;
           }
           img{
             width: 100px;

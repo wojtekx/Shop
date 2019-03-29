@@ -111,7 +111,7 @@ export default {
       margin-top: 20px;
       font-size: 20px;
       color: black;
-      font-weight: 700;
+      font-weight: 800;
     }
 }
 </style>

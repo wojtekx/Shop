@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-     <router-link to="/">Powrót do sklepu</router-link>
+     <p class="shopBack"><router-link to="/" ><img src="../assets/logo.png" alt="logo"></router-link></p>
       <div class="basket">
         <div class="basketHeader">
           <p>Produkt</p>
@@ -69,6 +69,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.shopBack{
+    margin: 0;
+    padding-top: 30px;
+    a{
+      text-decoration: none;
+      color: #000000;
+      &:hover{
+        color: blue;
+      }
+      img{
+        width: 60px;
+      }
+    }
+}
 .basket {
     display: flex;
     flex-direction: column;
@@ -113,6 +127,54 @@ export default {
       color: black;
       font-weight: 800;
     }
+}
+
+@media(min-width: 320px)and(max-width: 768px){
+  .basket{
+    .basketHeader{
+      width:90vw;
+    }
+    .basketItem{
+      width:90vw;
+      .itemDesc{
+        width: auto;
+        height: 100px;
+        img{
+          display: none;
+        }
+        p{
+          width: auto;
+          margin-right: 19px;
+          &:nth-child(2){
+            width: 55px;
+            font-size: 13px;
+            text-align: left;
+          }
+          &:nth-child(4){
+            display: flex;
+            flex-direction: column;
+            button{
+              background-color: #42b983;
+              border: 1px solid #280bce;
+              border-radius: 5px;
+              padding: 2px 6px;
+              font-size: 17px;
+              margin: 2px 0;
+              margin-right: 0;
+            }
+          }
+        }
+        button.delete{
+          background-color: red;
+          color: white;
+          border-radius: 8px;
+          padding: 5px 9px;
+          border: 1px solid #280bce;
+          margin-right: 0;
+        }
+      }
+    }
+  }
 }
 </style>
 

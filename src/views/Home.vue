@@ -1,7 +1,10 @@
 <template>
   <div class="app">
-     <router-link to="/koszyk">Koszyk</router-link>
-    <Main msg="Sklep" />
+     <div class="nav">
+       <img src="../assets/logo.png" alt="logo">
+       <router-link class="basketLink" to="/koszyk"><img src="../assets/shopping-cart-solid.svg" alt="basket" width="50px" height="50px"></router-link>
+     </div>
+      <h1 class="appTitle">Shop</h1>
     <div class="shop">
       <div class="card" v-for="item in data" :key="item.id">
         <div class="card-image">
@@ -71,6 +74,18 @@ export default {
 }
 </script>
 <style scoped lang="scss" >
+  .nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2894ca;
+    box-shadow: 0 0 16px 5px #294c94;
+    padding-bottom: 5px;
+    img{
+      width: 60px;
+      padding: 15px 0 0 15px;
+    }
+  }
   .shop{
     display: flex;
     flex-wrap: wrap;
@@ -92,9 +107,26 @@ export default {
           padding: 50px;
           margin: 0 auto;
           background: white;
+          border-radius: 5px;
+          h4{
+            color:#076aa7;
+          }
           .basketInfo{
             display: flex;
             justify-content: space-between;
+            .basketInfoItem{
+              p:first-child{
+                font-weight: bold;
+              }
+              button{
+                background: blue;
+                color: white;
+                border: 0;
+                padding: 10px;
+                border-radius: 10px;
+                cursor: pointer;
+              }
+            }
           }
         }
       }
@@ -102,7 +134,7 @@ export default {
       width: 200px;
       margin: 10px;
       position: relative;
-     
+      white-space: nowrap;
       img{
         max-width: 200px;
         &:hover + button{
@@ -130,6 +162,43 @@ export default {
         margin: 0;
         text-align: left;
         padding-left: 3px;
+        font-weight: bold;
+        margin-top: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      a{
+        text-decoration: none;
+        color: #1515d3;
+      }
+    }
+  }
+  .appTitle{
+    padding-top: 100px;
+    margin: 0;
+  }
+  .basketLink{
+    position: absolute;
+    top: 0;
+    right: 15px;
+    &::before{
+      content: "basket";
+      position: absolute;
+      font-size: 10px;
+      color: white;
+      top: 25px;
+      right: 9px;
+    }
+  }
+
+  @media(min-width: 320px)and(max-width: 768px){
+    .shop{
+      .modal{
+        height: 100%;
+        .modalBody{
+          width: 88vw;
+          padding: 15px;
+        }
       }
     }
   }

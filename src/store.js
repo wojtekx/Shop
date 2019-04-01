@@ -32,7 +32,6 @@ export default new Vuex.Store({
     ADD_TO_PRODUCTCARD(state, data){
       state.productCard = data;
       // state.basketValue += Number(data.price.slice(1))
-      console.log(state.basketValue);
     },
     SET_BASKETVALUE(state, data){
       state.basketValue = data

@@ -87,6 +87,11 @@ export default {
     background: #2894ca;
     box-shadow: 0 0 16px 5px #294c94;
     padding-bottom: 5px;
+    max-width: 1000px;
+    margin: 0 auto;
+    .shopBack{
+      margin: 0;
+    }
     img{
       width: 60px;
       padding: 15px 0 0 15px;
@@ -141,8 +146,9 @@ export default {
     width: 80vw;
     justify-content: space-around;
     align-items: flex-end;
-    margin: 50px 0 0;
     position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
      p.title {
             position: absolute;
             top: 10px;
@@ -180,10 +186,13 @@ export default {
 }
 @media(min-width: 320px)and(max-width: 768px){
     .produkt{
+      .nav{
+        padding-bottom: 0;
+      }
          .modal{
             height: 100%;
             .modalBody{
-                width: 88vw;
+                width: 285px;
                 padding: 15px;
                 }
         }
@@ -191,9 +200,72 @@ export default {
         width:90vw;
         flex-direction: column;
         margin: 0 auto;
-        padding-top: 20px;
+        padding-top: 10px;
         img{
             width: 200px;
+            margin: 95px auto 0 ;
+        }
+        p.title{
+            top: 0;
+            font-size: 26px;
+            width: 200px;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        .desc{
+            width: 70vw;
+            margin: 0 auto;
+            .desc-item{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                    p{
+                        font-size: 20px;
+                        font-weight: bold;
+                        margin-right:5px;
+                        margin-left: 5px;
+                    }
+                .counter{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    p{
+                        font-size: 20px;
+                        font-weight: bold;
+                        margin-right:5px;
+                        margin-left: 5px;
+                    }
+                }
+                button{
+                    background-color: #3331a5;
+                    color: white;
+                    padding: 7px 12px;
+                    border: 1px solid black;
+                    border-radius: 8px;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+    }
+}
+@media(min-width: 768px){
+  // and(max-width: 768px)
+    .produkt{
+         .modal{
+            height: 100%;
+            .modalBody{
+                width: 320px;
+                padding: 15px;
+                }
+        }
+        .produktCard{
+        width:70vw;
+        flex-direction: row;
+        margin: 0 auto;
+        padding-top: 20px;
+        img{
+            width: 300px;
             margin: 95px auto 0 ;
         }
         p.title{
@@ -203,7 +275,7 @@ export default {
             transform: translate(-50%, 0);
         }
         .desc{
-            width: 70vw;
+            width: 50vw;
             margin: 0 auto;
             .desc-item{
                 display: flex;

@@ -81,6 +81,7 @@ export default {
     background: #2894ca;
     box-shadow: 0 0 16px 5px #294c94;
     padding-bottom: 5px;
+    position: relative;
     img{
       width: 60px;
       padding: 15px 0 0 15px;

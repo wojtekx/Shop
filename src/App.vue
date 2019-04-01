@@ -5,9 +5,17 @@
 </template>
 
 <style lang="scss">
-
+html{
+   background-color: #788bdf8a;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+}
 body{
   margin: 0;
+}
+button{
+  cursor: pointer;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -15,10 +23,8 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000;
-  background-color: #788bdf8a;
-  padding: 0;
-  margin: 0;
-  min-height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 #nav {
   padding: 30px;

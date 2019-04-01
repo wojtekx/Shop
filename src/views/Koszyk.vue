@@ -1,10 +1,12 @@
 <template>
   <div class="app">
-     <p class="shopBack"><router-link to="/" ><img src="../assets/logo.png" alt="logo"></router-link></p>
+     <nav class="nav">
+       <p class="shopBack"><router-link to="/" ><img src="../assets/logo.png" alt="logo"></router-link></p>
+     </nav>
       <div class="basket">
         <div class="basketHeader">
           <p>Produkt</p>
-          <p></p>
+          <p class="not-mobile"></p>
           <p>Cena</p>
           <p>Ilość</p>
           <p>Wartość</p>
@@ -42,6 +44,9 @@ export default {
       let result = this.$store.basketValue;
       this.result -= Number(card.price.slice(1)*card.counter)
       this.$store.dispatch("setBasketValue", this.result)
+      if(this.result === 0){
+        document.querySelector('.basketHeader').innerHTML = "<p style='text-aling:center; width: 100%;'> Brak produktów w koszyku </p>"
+      }
     },
     subtract(card){
       if(card.counter > 1 ) {
@@ -62,6 +67,9 @@ export default {
         this.result += x[i]
       }
       this.$store.dispatch("setBasketValue", this.result)
+      if(this.result === 0){
+        document.querySelector('.basketHeader').innerHTML = "<p style='text-aling:center; width: 100%;'> Brak produktów w koszyku </p>"
+      }
   },
 
   computed: mapState(["basket", "basketValue"])
@@ -69,20 +77,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.shopBack{
-    margin: 0;
-    padding-top: 30px;
-    a{
-      text-decoration: none;
-      color: #000000;
-      &:hover{
-        color: blue;
-      }
-      img{
-        width: 60px;
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2894ca;
+    box-shadow: 0 0 16px 5px #294c94;
+    padding-bottom: 5px;
+    height: 100px;
+    position: relative;
+    img{
+     width: 60px;
+     position: absolute;
+     top:50%;
+     left:50%;
+     transform: translate(-50%, -50%);
+     animation: mymove 2s infinite;
+     @keyframes mymove {
+        0% {filter:brightness(80%)}
+        50% {filter:brightness(60%)}
+        100% {filter:brightness(80%)}
       }
     }
-}
+  }
+
 .basket {
     display: flex;
     flex-direction: column;
@@ -133,12 +151,17 @@ export default {
   .basket{
     .basketHeader{
       width:90vw;
+      p.not-mobile{
+        display: none;
+      }
     }
     .basketItem{
       width:90vw;
       .itemDesc{
-        width: auto;
-        height: 100px;
+          width: 100%;
+          height: 100px;
+          display: flex;
+          justify-content: space-between;
         img{
           display: none;
         }
@@ -176,5 +199,59 @@ export default {
     }
   }
 }
+@media(min-width: 768px){
+  .basket{
+    .basketHeader{
+      width:90vw;
+      max-width: 1000px;
+      margin: 0 auto;
+      p.not-mobile{
+        display: none;
+      }
+    }
+    .basketItem{
+      width:90vw;
+      max-width: 1000px;
+      margin: 0 auto;
+      .itemDesc{
+          width: 100%;
+          height: 100px;
+          display: flex;
+          justify-content: space-between;
+        p{
+          width: auto;
+          margin-right: 19px;
+          &:nth-child(2){
+            width: 55px;
+            font-size: 13px;
+            text-align: left;
+          }
+          &:nth-child(4){
+            display: flex;
+            flex-direction: column;
+            button{
+              background-color: #42b983;
+              border: 1px solid #280bce;
+              border-radius: 5px;
+              padding: 2px 6px;
+              font-size: 17px;
+              margin: 2px 0;
+              margin-right: 0;
+            }
+          }
+        }
+        button.delete{
+          background-color: red;
+          color: white;
+          border-radius: 8px;
+          padding: 5px 9px;
+          border: 1px solid #280bce;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
 </style>
 

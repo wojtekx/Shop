@@ -5,8 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "node ./node_modules/vue-gh-pages/index.js"
   },
   "homepage": "https://wojtekx.github.io/shop",
   "dependencies": {

@@ -44,7 +44,8 @@ export default new Vuex.Store({
   actions: {
     getData({commit}){
       axios
-      .get("http://www.mocky.io/v2/5ab0d1882e0000e60ae8b7a6")
+      // .get("https://www.mocky.io/v2/5ab0d1882e0000e60ae8b7a6")
+      .get('./product.json')
       .then(response => response.data)
       .then(data => {
         commit("SET_DATA", data )

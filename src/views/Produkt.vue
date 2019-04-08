@@ -31,7 +31,7 @@
               <div class="basketInfoItem">
                 <p>Cena jednostkowa</p>
                 <p> {{productCard.counter}} x {{productCard.price}}</p>
-                <button v-on:click="removeClass()">Kontynuuj zakupy</button>
+                <router-link to="/"><button v-on:click="removeClass()">Kontynuuj zakupy</button></router-link>
               </div>
               <div class="basketInfoItem">
                 <p>Wartość koszyka</p>

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Koszyk from './views/Koszyk.vue'
 import Produkt from './views/Produkt.vue'
+import Result from './views/Result.vue'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/produkt',
       name: 'Produkt',
       component: Produkt
+    },
+    {
+      path: '/podsumowanie',
+      name: 'Result',
+      component: Result
     },
   ]
 })

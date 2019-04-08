@@ -21,11 +21,32 @@
               <p>${{(card.price.slice(1) * card.counter).toFixed(2)}}</p>
               <button class="delete" v-on:click="deleteItem(card)">X</button>
             </div>
-            
         </div>
-        <div class="basketValue">
-              wartość koszyka: ${{ this.result.toFixed(2)}}
-            </div>
+       <section class="options">
+          <div class="delivery">
+            <p>Sposób dostawy</p>
+            <label for="1"><input type="radio" name="dostawa" id="osobisty" checked> Odbiór osobisty - $0</label>
+            <label for="1"><input type="radio" name="dostawa" id="kurier"> Kurier - $0</label>
+            <label for="1"><input type="radio" name="dostawa" id="poczta"> Poczta - $0</label>
+          </div>
+          <div class="payment">
+            <p>Sposób płatności</p>
+            <label for="4"><input type="radio" name="platnosc" id="pobranie" checked> Pobranie / gotówka przy odbiorze - $0</label>
+            <label for="5"><input type="radio" name="platnosc" id="przelew"> Płatne z góry na konto - $0</label>
+            <label for="6"><input type="radio" name="platnosc" id="przelewBlyskawiczny"> Przelwe błyskawiczny - $0</label>
+          </div>
+       </section>
+        <section class="basketValue">
+              <div><b>Wartość produktów w koszyku: </b> <span>${{ this.result.toFixed(2)}} </span></div>
+              <div><b>Transport: </b><span>$0 </span></div>
+              <div><b>Płatność: </b><span>$0 </span></div>
+              <div><b>Całkowita kwota do zapłaty: </b><span>${{ this.result.toFixed(2)}}</span></div>
+              
+        </section>
+        <section class="submit">
+          <router-link to="/"><button>Powrót do sklepu</button></router-link>
+          <router-link to="/podsumowanie"><button>Dalej</button></router-link>
+        </section>
       </div>
   </div>
 </template>
@@ -136,15 +157,58 @@ export default {
           }
         }
     }
+    .options{
+      display: flex;
+      justify-content: space-between;
+      width: 100vw;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding-bottom: 20px;
+      border-bottom: 1px solid gray;
+      .delivery, .payment{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 47%;
+        p{
+          text-align: left;
+          width: 95%;
+          background: #888787;
+          padding: 12px;
+          color: white;
+        }
+        label input{
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
     .basketValue{
-      width: 270px;
-      margin-left: auto;
-      margin-right: 10%;
-      margin-top: 20px;
+      margin: 20px 0 20px auto;
       font-size: 20px;
       color: black;
       font-weight: 800;
+      div{
+        display: flex;
+        justify-content: space-between;
+        span{
+          margin-left: 20px;
+        }
+      }
     }
+    .submit{
+      border-top: 1px solid gray;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      button{
+        background-color: lightblue;
+        width: 100px;
+        height: 50px;
+      }
+    }
+
 }
 
 @media(min-width: 320px)and(max-width: 768px){
@@ -179,7 +243,7 @@ export default {
             button{
               background-color: #42b983;
               border: 1px solid #280bce;
-              border-radius: 5px;
+              border-radius: 3px;
               padding: 2px 6px;
               font-size: 17px;
               margin: 2px 0;
@@ -190,7 +254,7 @@ export default {
         button.delete{
           background-color: red;
           color: white;
-          border-radius: 8px;
+          border-radius: 3px;
           padding: 5px 9px;
           border: 1px solid #280bce;
           margin-right: 0;
@@ -205,9 +269,6 @@ export default {
       width:90vw;
       max-width: 1000px;
       margin: 0 auto;
-      p.not-mobile{
-        display: none;
-      }
     }
     .basketItem{
       width:90vw;
@@ -228,11 +289,14 @@ export default {
           }
           &:nth-child(4){
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width:75px;
             button{
               background-color: #42b983;
               border: 1px solid #280bce;
-              border-radius: 5px;
+              border-radius: 3px;
               padding: 2px 6px;
               font-size: 17px;
               margin: 2px 0;
@@ -243,7 +307,7 @@ export default {
         button.delete{
           background-color: red;
           color: white;
-          border-radius: 8px;
+          border-radius: 3px;
           padding: 5px 9px;
           border: 1px solid #280bce;
           margin-right: 0;

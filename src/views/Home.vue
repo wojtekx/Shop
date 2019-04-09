@@ -9,7 +9,7 @@
       <div class="card" v-for="item in data" :key="item.id">
         <div class="card-image">
             <img :srcset="item.image">
-            <button v-on:click="add(item)">Buy now</button>
+            <button v-on:click="add(item)" id="buyNow">Buy now</button>
         </div>
         <router-link to="/produkt"><p class="title" v-on:click="setProduct(item)" >{{item.product_name}}</p></router-link>
         <p class="price">{{item.price}}</p>
@@ -194,6 +194,9 @@ export default {
 
   @media(min-width: 320px)and(max-width: 768px){
     .shop{
+      #buyNow{
+        display: none;
+      }
       .modal{
         height: 100%;
         .modalBody{

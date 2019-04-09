@@ -8,7 +8,9 @@
         <img :srcset="productCard.image">
         <p class="title">{{productCard.product_name}}</p>
         <div class="desc">
-            
+            <div class="desc-item">
+                <p class="description">{{productCard.description}}</p>
+            </div>
             <div class="desc-item">
                 <p class="price">{{productCard.price}}</p>
                 <p class="price">PLN/szt.</p>
@@ -72,6 +74,7 @@ export default {
         },
     },
     mounted(){
+       
        
         
     },
@@ -157,26 +160,13 @@ export default {
             font-weight: bold;
         }
     .desc{
-        .dect-item{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 170px;
-            .counter{
-                width:64px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+         .description{
+                text-align: justify;
+                padding: 0 20px;
+                overflow: auto;
+                height: 220px;
+                line-height: 31px;
             }
-            button{
-                background-color: #3331a5;
-                color: white;
-                padding: 7px 12px;
-                border: 1px solid black;
-                border-radius: 8px;
-                margin-left: 5px;
-            }
-        }
         p.price{
             font-size: 20px;
         }
@@ -219,12 +209,15 @@ export default {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                    p{
-                        font-size: 20px;
-                        font-weight: bold;
-                        margin-right:5px;
-                        margin-left: 5px;
-                    }
+                .description{
+                    display: none;
+                }
+                p{
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-right:5px;
+                    margin-left: 5px;
+                }
                 .counter{
                     display: flex;
                     justify-content: center;
@@ -250,7 +243,6 @@ export default {
     }
 }
 @media(min-width: 768px){
-  // and(max-width: 768px)
     .produkt{
          .modal{
             height: 100%;

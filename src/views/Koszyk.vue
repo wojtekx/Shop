@@ -25,27 +25,27 @@
        <section class="options">
           <div class="delivery">
             <p>Sposób dostawy</p>
-            <label for="1"><input type="radio" name="dostawa" id="osobisty" checked> Odbiór osobisty - $0</label>
-            <label for="1"><input type="radio" name="dostawa" id="kurier"> Kurier - $0</label>
-            <label for="1"><input type="radio" name="dostawa" id="poczta"> Poczta - $0</label>
+            <label for="osobisty"><input v-on:click="moreOptionsDelivery" type="radio" name="dostawa" id="osobisty" checked> Odbiór osobisty - $0</label>
+            <label for="kurier"><input v-on:click="moreOptionsDelivery" type="radio" name="dostawa" id="kurier"> Kurier - ${{this.kurier}}</label>
+            <label for="poczta"><input v-on:click="moreOptionsDelivery" type="radio" name="dostawa" id="poczta"> Poczta - ${{this.poczta}}</label>
           </div>
           <div class="payment">
             <p>Sposób płatności</p>
-            <label for="4"><input type="radio" name="platnosc" id="pobranie" checked> Pobranie / gotówka przy odbiorze - $0</label>
-            <label for="5"><input type="radio" name="platnosc" id="przelew"> Płatne z góry na konto - $0</label>
-            <label for="6"><input type="radio" name="platnosc" id="przelewBlyskawiczny"> Przelwe błyskawiczny - $0</label>
+            <label for="przelew"><input  v-on:click="moreOptionsPayment" type="radio" name="platnosc" id="przelew" checked> Płatne z góry na konto </label>
+            <label for="pobranie"><input  v-on:click="moreOptionsPayment" type="radio" name="platnosc" id="pobranie" > Pobranie / gotówka przy odbiorze</label>
+            <label for="przelewBlyskawiczny"><input  v-on:click="moreOptionsPayment" type="radio" name="platnosc" id="przelewBlyskawiczny"> Przelew błyskawiczny</label>
           </div>
        </section>
         <section class="basketValue">
               <div><b>Wartość produktów w koszyku: </b> <span>${{ this.result.toFixed(2)}} </span></div>
-              <div><b>Transport: </b><span>$0 </span></div>
-              <div><b>Płatność: </b><span>$0 </span></div>
-              <div><b>Całkowita kwota do zapłaty: </b><span>${{ this.result.toFixed(2)}}</span></div>
+              <div><b>Transport: </b><span>${{this.delivery}} </span></div>
+              <div><b>Płatność: </b><span>${{this.payment}} </span></div>
+              <div><b>Całkowita kwota do zapłaty: </b><span>${{ (this.result+this.options).toFixed(2)  }}</span></div>
               
         </section>
         <section class="submit">
           <router-link to="/"><button>Powrót do sklepu</button></router-link>
-          <router-link to="/podsumowanie"><button>Dalej</button></router-link>
+          <router-link to="/podsumowanie"><button id="koszykBtn">Dalej</button></router-link>
         </section>
       </div>
   </div>
@@ -57,6 +57,13 @@ export default {
   data(){
     return{
       result: 0,
+      kurier: 15,
+      poczta:10,
+      pobranie: 10,
+      przelewB: 5,
+      payment: 0,
+      delivery: 0,
+      options:0,
     }
   },
   methods:{
@@ -65,8 +72,16 @@ export default {
       let result = this.$store.basketValue;
       this.result -= Number(card.price.slice(1)*card.counter)
       this.$store.dispatch("setBasketValue", this.result)
-      if(this.result === 0){
-        document.querySelector('.basketHeader').innerHTML = "<p style='text-aling:center; width: 100%;'> Brak produktów w koszyku </p>"
+       if(this.result === 0 ){
+          this.payment = 0;
+          this.delivery = 0;
+        }
+      
+      if(this.delivery === 0) this.payment = 0;
+        this.options = this.payment + this.delivery;
+      if(this.result === 0 || this.result === -0 ){
+        document.querySelector('.basketHeader').innerHTML = "<p style='text-aling:center; width: 100%;'> Brak produktów w koszyku </p>";
+        document.querySelector('#koszykBtn').style.display="none";
       }
     },
     subtract(card){
@@ -81,6 +96,43 @@ export default {
       this.result += Number(card.price.slice(1))
       this.$store.dispatch("setBasketValue", this.result)
     },
+
+    moreOptionsDelivery(e){
+      
+      switch(e.target.id){
+        case 'kurier':
+          this.delivery = this.kurier
+          break
+        case 'poczta':
+          this.delivery = this.poczta
+          break
+        case 'osobisty':
+           this.delivery = 0
+           break
+      }
+      
+      if(this.result === 0 ){
+        this.delivery = 0;
+      }
+      this.options = this.payment + this.delivery;
+    },
+    moreOptionsPayment(e){
+      switch(e.target.id){
+        case 'przelew':
+           this.payment = 0
+           break
+        case 'pobranie':
+           this.payment = this.pobranie
+           break
+        case 'przelewBlyskawiczny':
+           this.payment = this.przelewB
+           break
+      } 
+      if(this.result === 0 ){
+        this.payment = 0;
+      }
+       this.options = this.payment + this.delivery;
+  },
   },
   mounted(){
      const x = this.$store.state.basket.map(e => Number(e.price.slice(1)* e.counter))
@@ -89,12 +141,15 @@ export default {
       }
       this.$store.dispatch("setBasketValue", this.result)
       if(this.result === 0){
-        document.querySelector('.basketHeader').innerHTML = "<p style='text-aling:center; width: 100%;'> Brak produktów w koszyku </p>"
+        document.querySelector('.basketHeader').innerHTML = "<p style='text-aling:center; width: 100%;'> Brak produktów w koszyku </p>";
+        document.querySelector('#koszykBtn').style.display="none";
       }
+      
   },
 
-  computed: mapState(["basket", "basketValue"])
+  computed: mapState(["basket", "basketValue"]),
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -260,6 +315,33 @@ export default {
           margin-right: 0;
         }
       }
+    }
+    .options{
+      width: 90vw;
+      .payment, .delivery{
+        p{
+          width: 70%;
+        }
+        label{
+          font-size: 15px;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          width: 80%;
+          margin: 10px 0;
+        }
+      }
+    }
+    .basketValue{
+      div{
+        margin: 10px 0;
+        b{
+          text-align: left;
+        }
+      }
+    }
+    .submit{
+      width: 85%;
     }
   }
 }
